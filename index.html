@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Interactive Navigation Menu</title>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #0D1B2A;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between; /* Brand left, links right */
+      align-items: center;
+      transition: background-color 0.3s ease;
+      z-index: 1000;
+    }
+
+    nav.scrolled {
+      background-color: #061e3f;
+    }
+
+    .logo-text {
+      font-size: 2rem;
+      font-weight: 800;
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 50px;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 2rem;
+      padding: 8px 12px;
+    }
+
+    .nav-links a:hover {
+      color: #5e59f5;
+    }
+
+    section {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      padding: 100px 20px;
+      margin-top: 60px;
+      height: 100vh;
+      transition: background-color 0.6s ease;
+    }
+
+    section h1 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+   .head{
+    align-items: center;
+    margin-left: 25%;
+   }
+
+     section p {
+      max-width: 800px;
+      margin: auto;
+      color: black;
+      font-size: 1.5rem;
+      text-align: center;
+    }
+
+    /* Default background */
+    #home, #about, #projects {
+      background-color: #f4f4f4;
+    }
+
+    /* Active backgrounds */
+    #home.active {
+      background-color: #cbf1f3;
+    }
+
+    #about.active {
+      background-color: #c4d6ef;
+    }
+
+    #projects.active {
+      background-color: #f3e8c9;
+    }
+    
+  </style>
+</head>
+<body>
+
+  <nav id="navbar">
+    <div class="logo-text">Prodigy Infotech</div>
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+    </div>
+  </nav>
+
+  <section id="home">
+    <h1>Home</h1>
+<p>Welcome to my <b>personal webspace</b> <br>A place where creativity meets code. <br> Explore this interactive website to learn more about me, my journey, and the projects I've built.  <br>Scroll down to watch each section come alive with smooth transitions and engaging colors!</p>
+  </section>
+
+  <section id="about">
+    <h1>About Me</h1>
+    <p> <br>Hello, myself <b>Samiksha Ghadge</b>.<br> I’m a passionate and enthusiastic B.Tech student who loves learning new things and growing through experiences.<br> With a curious mindset and a positive outlook, I enjoy exploring different opportunities that help me develop both personally and professionally. <br>I believe in staying adaptable, open to challenges, and committed to continuous self-improvement.</p>
+  </section>
+
+  <section id="projects">
+    <h1>Projects</h1>
+   <div>
+  <h2 class="head">DropAware – Water Management System</h2>
+  <p>
+    An interactive web application built using HTML, CSS, and JavaScript that promotes water conservation through a water footprint calculator, engaging quizzes, and practical solutions. The project aims to spread awareness and encourage responsible water usage by combining education with technology.
+    <br />
+    
+  <strong>GitHub:</strong> <a href="https://github.com/samikshaghadge/Water_Management_System" target="_blank">View Project</a>
+<br>  
+</p>
+</div>
+
+<div>
+  <br>
+  <h2 class="head">Employee Management System</h2>
+  <p>
+    A user-friendly system for managing employee data with features to add, view, update, and delete records. This project enhances efficiency over manual record-keeping and showcases practical database handling and interface design.
+    <br />
+    <strong>GitHub:</strong> <a href="https://github.com/samikshaghadge/Employee_Management_System" target="_blank">View Project</a>
+  </p>
+</div>
+  </section>
+
+    <script>
+    // Change navbar background on scroll
+    window.addEventListener('scroll', function () {//listen for scroll event
+      const navbar = document.getElementById('navbar');
+      if (window.scrollY > 50) { //returns how far window has been scrolled vertically
+        navbar.classList.add('scrolled');//add scrolled class to <nav> elemnt if user scrolled more than 50pixels
+      } else {
+        navbar.classList.remove('scrolled');//removes class if user scrolled back to the top
+      }
+    });
+
+    // Change section background when in view
+    const sections = document.querySelectorAll('section');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        } else {
+          entry.target.classList.remove('active');
+        }
+      });
+    }, {
+      threshold: 0.6
+    });
+
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+  </script>
+</body>
+</html>
